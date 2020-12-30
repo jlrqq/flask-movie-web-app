@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 import requests
 
 app = Flask(__name__) 
 
 app.config["DEBUG"] = True
 
-@app.route("/homepage")
+@app.route("/")
 def show_landing_page():
     return render_template("landing-page.html")
 
@@ -13,7 +13,7 @@ def show_landing_page():
 @app.route("/search", methods=["POST"])
 def form_submit():
     user_query = request.form['search_query']
-    redirect_url = url_for('.search.imdb', query_string=user_query)
+    redirect_url = url_for('.search_imdb', query_string=user_query)
     return redirect(redirect_url)
 
 
